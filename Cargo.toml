@@ -8,4 +8,4 @@ edition = "2021"
 [dependencies]
 console = "0.15.5"
 indicatif = { version =  "0.17.3" }
-dialoguer = { version = "0.10.3" }
+dialoguer = { version = "0.10.3", default-features = true, features = ["completion", "history", "password", "fuzzy-select"] }
