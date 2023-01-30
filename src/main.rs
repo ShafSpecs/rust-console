@@ -1,5 +1,5 @@
 // mod error_handling;
-use std::{thread, time::Duration};
+use std::{thread, time::Duration, cmp::min};
 
 use console::{style, Style, Term};
 
@@ -77,4 +77,22 @@ fn main() {
     pb.set_message("Calculating...");
     thread::sleep(Duration::from_secs(5));
     pb.finish_with_message("Done");
+
+    /* Another example from the repo. `indicatif` is very exciting & interesting */
+    let mut downloaded = 0;
+    let total_size = 231231231;
+
+    let downloader = ProgressBar::new(total_size);
+    downloader.set_style(ProgressStyle::with_template("{spinner:.green} [{elapsed_precise}] [{wide_bar:.cyan/blue}] {bytes}/{total_bytes} ({bytes_per_sec}, {eta})")
+        .unwrap()
+        .progress_chars("#>-"));
+
+    while downloaded < total_size {
+        let new = min(downloaded + 223211, total_size);
+        downloaded = new;
+        downloader.set_position(new);
+        thread::sleep(Duration::from_millis(12));
+    }
+
+    downloader.finish_with_message("downloaded");
 }
