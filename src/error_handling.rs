@@ -1,3 +1,3 @@
 pub fn printer() -> () {
-  print!("Hello World");
+  print!("Hello World\n");
 }
